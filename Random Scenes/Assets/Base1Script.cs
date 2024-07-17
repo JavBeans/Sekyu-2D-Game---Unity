@@ -6,14 +6,15 @@ using UnityEngine.UI;
 
 public class Base1Script : MonoBehaviour
 {
-    public static int score2;
-
-
     public Text textWin;
     public Text textScore;
+
+
+    
+    public static int score2;
+    public static int playernumber1;
     public static bool gamefinish;
 
-    public static int playernumber1;
     private void Start()
     {
         updatedScore();
@@ -33,8 +34,7 @@ public class Base1Script : MonoBehaviour
         }
         else if (other.gameObject.CompareTag("Player1"))
         {
-            playernumber1 = 2;
-            Base2Script.playernumber2 = 1;
+
         }
     }
 
@@ -44,7 +44,7 @@ public class Base1Script : MonoBehaviour
     }
     IEnumerator RestartScene()
     {
-        yield return new WaitForSeconds(2); // Wait for 2 seconds before restarting
+        yield return new WaitForSeconds(2); 
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

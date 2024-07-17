@@ -14,63 +14,79 @@ public class MoveArrows : MonoBehaviour
     public Vector3 offset2;
     public Text textPlayer2;
     public Text textPlayer2Label;
+    public GameObject P1;
+    public GameObject P2;
+    public GameObject P3;
+    private bool StartsMove;
+    
 
-    Rigidbody2D rb;
+    private Rigidbody2D rb;
+    private GameObject activePlayer;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         MovementX = 0;
         MovementY = 0;
+        StartsMove = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        rb.velocity = new Vector2(MovementX * speed * Time.deltaTime, MovementY * speed * Time.deltaTime);
+        HandlePlayerSwitch();
+        HandleMovement();
 
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            MovementY = 1;
-        }
-        if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            MovementY = -1;
-        }
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            MovementX = -1;
-        }
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            MovementX = 1;
-        }
-        if (Input.GetKeyUp(KeyCode.UpArrow))
-        {
-            MovementY = 0;
-        }
-        if (Input.GetKeyUp(KeyCode.DownArrow))
-        {
-            MovementY = 0;
-        }
-        if (Input.GetKeyUp(KeyCode.LeftArrow))
-        {
-            MovementX = 0;
-        }
-        if (Input.GetKeyUp(KeyCode.RightArrow))
-        {
-            MovementX = 0;
-        }
         Vector3 targetPosition1 = player2Location.position + offset1;
         Vector3 targetPosition2 = player2Location.position + offset2;
         textPlayer2.transform.position = Camera.main.WorldToScreenPoint(targetPosition1);
         textPlayer2Label.transform.position = Camera.main.WorldToScreenPoint(targetPosition2);
-        if (Base2Script.playernumber2 == 2)
+    }
+    void HandlePlayerSwitch()
+    {
+        if (Input.GetKeyDown(KeyCode.I))
         {
-            textPlayer2Label.text = "Predator";
+            activePlayer = P1;
+            rb = P1.GetComponent<Rigidbody2D>();
+            StartsMove = true;
+
         }
-        else
+        else if (Input.GetKeyDown(KeyCode.O))
         {
-            textPlayer2Label.text = "Prey";
+            activePlayer = P2;
+            rb = P2.GetComponent<Rigidbody2D>();
+            StartsMove = true;
         }
+        else if (Input.GetKeyDown(KeyCode.P))
+        {
+            activePlayer = P3;
+            rb = P3.GetComponent<Rigidbody2D>();
+            StartsMove = true;
+        }
+    }
+
+    void HandleMovement()
+    {
+        MovementX = 0;
+        MovementY = 0;
+        if (StartsMove == true)
+        {
+            if (Input.GetKey(KeyCode.UpArrow))
+            {
+                MovementY = 1;
+            }
+            if (Input.GetKey(KeyCode.DownArrow))
+            {
+                MovementY = -1;
+            }
+            if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                MovementX = -1;
+            }
+            if (Input.GetKey(KeyCode.RightArrow))
+            {
+                MovementX = 1;
+            }
+        }
+        rb.velocity = new Vector2(MovementX * speed * Time.deltaTime, MovementY * speed * Time.deltaTime);
     }
 }

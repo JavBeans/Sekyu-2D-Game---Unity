@@ -6,11 +6,13 @@ using UnityEngine.UI;
 
 public class Base2Script : MonoBehaviour
 {
-    public static int score1;
+    
     public Text textWin;
     public Text textScore;
 
+    public static int score1;
     public static int playernumber2;
+
     private void Start()
     {
         updatedScore();
@@ -29,8 +31,7 @@ public class Base2Script : MonoBehaviour
         }
         else if (other.gameObject.CompareTag("Player2"))
         {
-            playernumber2 = 2;
-            Base1Script.playernumber1 = 1;
+
         }
     }
     void updatedScore()
@@ -39,7 +40,7 @@ public class Base2Script : MonoBehaviour
     }
     IEnumerator RestartScene()
     {
-        yield return new WaitForSeconds(2); // Wait for 2 seconds before restarting
+        yield return new WaitForSeconds(2);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
