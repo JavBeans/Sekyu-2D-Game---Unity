@@ -1,22 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManagerScript : MonoBehaviour
 {
     public GameObject panel;
-    bool pressedKey = true;
-    
+    static bool howToPlayTriggered;
+
+    private void Start()
+    {
+        if (howToPlayTriggered == true)
+        {
+            panel.SetActive(false);
+        }
+    }
     void Update()
     {
-        if (Input.anyKeyDown && pressedKey == true)
+        if (Input.anyKeyDown)
         {
             howtoplay();
         }
     }
+
     void howtoplay()
     {
-        pressedKey = false;
+        howToPlayTriggered = true; // Set the static variable to true
         panel.SetActive(false);
     }
 }
