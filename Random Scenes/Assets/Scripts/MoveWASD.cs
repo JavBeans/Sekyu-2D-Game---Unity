@@ -11,6 +11,9 @@ public class MoveWASD : MonoBehaviour
 
     public Transform player1Location;
 
+    public Vector3 offset1;
+
+    public GameObject Arrow;
     public GameObject P1;
     public GameObject P2;
     public GameObject P3;
@@ -38,8 +41,7 @@ public class MoveWASD : MonoBehaviour
         HandlePlayerSwitch();
         HandleMovement();
         HandleInactivePlayers();
-
-        
+        UpdateArrowPosition();
     }
 
     void HandlePlayerSwitch()
@@ -65,6 +67,7 @@ public class MoveWASD : MonoBehaviour
             activePlayer = player;
             rb = player.GetComponent<Rigidbody2D>();
             StartsMove = true;
+            UpdateArrowPosition();
         }
     }
 
@@ -130,5 +133,17 @@ public class MoveWASD : MonoBehaviour
             }
         }
     }
-    
+    void UpdateArrowPosition()
+    {
+        if (activePlayer == null)
+        {
+            Arrow.SetActive(false);
+        }
+        else if (Arrow != null && activePlayer != null)
+        {
+            Arrow.SetActive(true);
+            Arrow.transform.position = activePlayer.transform.position + offset1;
+        }
+    }
+
 }

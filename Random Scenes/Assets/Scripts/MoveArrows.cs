@@ -12,7 +12,10 @@ public class MoveArrows : MonoBehaviour
     float MovementY;
 
     public Transform player2Location;
-    
+
+    public Vector3 offset1;
+
+    public GameObject Arrow;
     public GameObject P1;
     public GameObject P2;
     public GameObject P3;
@@ -38,6 +41,7 @@ public class MoveArrows : MonoBehaviour
         HandlePlayerSwitch();
         HandleMovement();
         HandleInactivePlayers();
+        UpdateArrowPosition();
 
     }
     
@@ -63,6 +67,7 @@ public class MoveArrows : MonoBehaviour
             activePlayer = player;
             rb = player.GetComponent<Rigidbody2D>();
             StartsMove = true;
+            UpdateArrowPosition();
         }
     }
 
@@ -124,6 +129,18 @@ public class MoveArrows : MonoBehaviour
                     playerRb.velocity = Vector2.zero; // Stop movement
                 }
             }
+        }
+    }
+    void UpdateArrowPosition()
+    {
+        if (activePlayer == null)
+        {
+            Arrow.SetActive(false);
+        }
+        else if (Arrow != null && activePlayer != null)
+        {
+            Arrow.SetActive(true);
+            Arrow.transform.position = activePlayer.transform.position + offset1;
         }
     }
 }

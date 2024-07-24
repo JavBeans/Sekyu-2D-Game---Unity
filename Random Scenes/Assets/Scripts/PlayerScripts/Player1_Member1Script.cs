@@ -40,6 +40,7 @@ public class Player1_Member1Script : MonoBehaviour
         if (other.gameObject.CompareTag("Base1"))
         {
             timeCount = 0;
+            textTime.text = timeCount.ToString("F2");
             isInsideBase = false;
         }
         if (other.gameObject.CompareTag("Player2"))
