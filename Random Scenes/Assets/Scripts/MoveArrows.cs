@@ -8,6 +8,7 @@ public class MoveArrows : MonoBehaviour
 {
     // Start is called before the first frame update
     public float speed;
+    public float sprintSpeed;
     float MovementX;
     float MovementY;
 
@@ -32,7 +33,10 @@ public class MoveArrows : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         MovementX = 0;
         MovementY = 0;
-        StartsMove = false;
+        SwitchToPlayer(P1);
+        MoveToBase(P1);
+        MoveToBase(P2);
+        MoveToBase(P3);
     }
 
     // Update is called once per frame
@@ -40,7 +44,7 @@ public class MoveArrows : MonoBehaviour
     {
         HandlePlayerSwitch();
         HandleMovement();
-        HandleInactivePlayers();
+        /*HandleInactivePlayers();*/
         UpdateArrowPosition();
 
     }
@@ -75,8 +79,13 @@ public class MoveArrows : MonoBehaviour
     {
         MovementX = 0;
         MovementY = 0;
+        float currentSpeed = speed;
         if (StartsMove && rb != null)
         {
+            if(Input.GetKey(KeyCode.RightShift))
+            {
+                currentSpeed = sprintSpeed;
+            }
             if (Input.GetKey(KeyCode.UpArrow))
             {
                 MovementY = 1;
@@ -93,10 +102,10 @@ public class MoveArrows : MonoBehaviour
             {
                 MovementX = 1;
             }
-            rb.velocity = new Vector2(MovementX * speed * Time.deltaTime, MovementY * speed * Time.deltaTime);
+            rb.velocity = new Vector2(MovementX * currentSpeed, MovementY * currentSpeed);
         }
     }
-    void HandleInactivePlayers()
+    /*void HandleInactivePlayers()
     {
         if (activePlayer != P1)
         {
@@ -110,7 +119,7 @@ public class MoveArrows : MonoBehaviour
         {
             MoveToBase(P3);
         }
-    }
+    }*/
     void MoveToBase(GameObject player)
     {
         if (player != null)
@@ -122,7 +131,7 @@ public class MoveArrows : MonoBehaviour
                 float distance = Vector3.Distance(base2.position, player.transform.position);
                 if (distance > stopDistance)
                 {
-                    playerRb.velocity = direction * speed * Time.deltaTime;
+                    playerRb.velocity = direction * speed;
                 }
                 else
                 {
@@ -141,6 +150,10 @@ public class MoveArrows : MonoBehaviour
         {
             Arrow.SetActive(true);
             Arrow.transform.position = activePlayer.transform.position + offset1;
+        }
+        else
+        {
+            Arrow.SetActive(false);
         }
     }
 }

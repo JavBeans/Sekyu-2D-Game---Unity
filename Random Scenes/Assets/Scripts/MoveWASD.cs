@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class MoveWASD : MonoBehaviour
 {
     public float speed;
+    public float sprintSpeed;
     float MovementX;
     float MovementY;
 
@@ -28,11 +29,14 @@ public class MoveWASD : MonoBehaviour
 
     void Start()
     {
+
         rb = GetComponent<Rigidbody2D>();
         MovementX = 0;
         MovementY = 0;
-        StartsMove = false;
-
+        SwitchToPlayer(P1);
+        MoveToBase(P1);
+        MoveToBase(P2);
+        MoveToBase(P3);
     }
 
     // Update is called once per frame
@@ -40,7 +44,7 @@ public class MoveWASD : MonoBehaviour
     {
         HandlePlayerSwitch();
         HandleMovement();
-        HandleInactivePlayers();
+        //HandleInactivePlayers()
         UpdateArrowPosition();
     }
 
@@ -75,8 +79,14 @@ public class MoveWASD : MonoBehaviour
     {
         MovementX = 0;
         MovementY = 0;
+        float currentSpeed = speed;
         if (StartsMove && rb != null)
         {
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                currentSpeed = sprintSpeed;
+            }
+
             if (Input.GetKey(KeyCode.W))
             {
                 MovementY = 1;
@@ -93,11 +103,11 @@ public class MoveWASD : MonoBehaviour
             {
                 MovementX = 1;
             }
-            rb.velocity = new Vector2(MovementX * speed * Time.deltaTime, MovementY * speed * Time.deltaTime);
+            rb.velocity = new Vector2(MovementX * currentSpeed, MovementY * currentSpeed);
         }
     }
 
-    void HandleInactivePlayers()
+    /*void HandleInactivePlayers()
     {
         if (activePlayer != P1)
         {
@@ -111,7 +121,7 @@ public class MoveWASD : MonoBehaviour
         {
             MoveToBase(P3);
         }
-    }
+    }*/
 
     void MoveToBase(GameObject player)
     {
@@ -124,7 +134,7 @@ public class MoveWASD : MonoBehaviour
                 float distance = Vector3.Distance(base1.position, player.transform.position);
                 if (distance > stopDistance)
                 {
-                    playerRb.velocity = direction * speed * Time.deltaTime;
+                    playerRb.velocity = direction * speed;
                 }
                 else
                 {
@@ -145,5 +155,4 @@ public class MoveWASD : MonoBehaviour
             Arrow.transform.position = activePlayer.transform.position + offset1;
         }
     }
-
 }

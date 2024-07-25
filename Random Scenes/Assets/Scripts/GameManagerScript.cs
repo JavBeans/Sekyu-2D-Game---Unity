@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManagerScript : MonoBehaviour
 {
@@ -28,4 +29,6 @@ public class GameManagerScript : MonoBehaviour
         howToPlayTriggered = true; // Set the static variable to true
         panel.SetActive(false);
     }
+
+    
 }
