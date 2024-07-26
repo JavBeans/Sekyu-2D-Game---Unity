@@ -10,6 +10,7 @@ TagManager:
   - Player2
   - Base1
   - Base2
+  - Prisoner1
   layers:
   - Default
   - TransparentFX

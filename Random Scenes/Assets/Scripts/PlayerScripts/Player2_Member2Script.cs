@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class Player2_Member2Script : MonoBehaviour
 {
     public Transform playerLocation;
+    public Transform base2Location;
     public Vector3 offset1;
     public Vector3 offset2;
 
@@ -14,6 +15,7 @@ public class Player2_Member2Script : MonoBehaviour
     public Text textTime;
 
     public float timeCount;
+    float captureSpeed = 5f;
 
     private bool isInsideBase;
 
@@ -51,39 +53,40 @@ public class Player2_Member2Script : MonoBehaviour
             if (other.gameObject == player1_1)
             {
                 playerTimeCount = player1_1.GetComponent<Player1_Member1Script>().timeCount;
-                if (timeCount < playerTimeCount)
-                {
-                    Destroy(other.gameObject); // Destroy Player1
-                }
-                else
-                {
-                    Destroy(gameObject); // Destroy Player2
-                }
+                HandlePlayerCollision(player1_1, playerTimeCount);
             }
             else if (other.gameObject == player1_2)
             {
                 playerTimeCount = player1_2.GetComponent<Player1_Member2Script>().timeCount;
-                if (timeCount < playerTimeCount)
-                {
-                    Destroy(other.gameObject); // Destroy Player1
-                }
-                else
-                {
-                    Destroy(gameObject); // Destroy Player2
-                }
+                HandlePlayerCollision(player1_2, playerTimeCount);
             }
             else if (other.gameObject == player1_3)
             {
                 playerTimeCount = player1_3.GetComponent<Player1_Member3Script>().timeCount;
-                if (timeCount < playerTimeCount)
-                {
-                    Destroy(other.gameObject); // Destroy Player1
-                }
-                else
-                {
-                    Destroy(gameObject); // Destroy Player2
-                }
+                HandlePlayerCollision(player1_3, playerTimeCount);
             }
+        }
+    }
+    private void HandlePlayerCollision(GameObject otherPlayer, float otherPlayerTimeCount)
+    {
+        if (timeCount < otherPlayerTimeCount)
+        {
+            StartCoroutine(CapturePlayer(otherPlayer)); //capture opponent
+        }
+    }
+    private IEnumerator CapturePlayer(GameObject player)
+    {
+        player.tag = "Prisoner1";
+        Rigidbody2D playerRb = player.GetComponent<Rigidbody2D>();
+        if (playerRb != null)
+        {
+            while (Vector3.Distance(player.transform.position, base2Location.position) > 0.1f)
+            {
+                Vector3 direction = (base2Location.position - player.transform.position).normalized;
+                playerRb.velocity = direction * captureSpeed;
+                yield return null;
+            }
+            playerRb.velocity = Vector2.zero; // Stop player movement
         }
     }
 

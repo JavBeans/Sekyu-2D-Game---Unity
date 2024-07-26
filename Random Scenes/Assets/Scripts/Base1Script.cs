@@ -31,6 +31,7 @@ public class Base1Script : MonoBehaviour
             gamefinish = true;
             updatedScore();
             StartCoroutine(RestartScene());
+            GameManagerScript.gameStarted = false;
         }
         else if (other.gameObject.CompareTag("Player1"))
         {

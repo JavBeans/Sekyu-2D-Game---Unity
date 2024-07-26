@@ -6,11 +6,14 @@ using UnityEngine.UI;
 
 public class GameManagerScript : MonoBehaviour
 {
+    public Text countdownText;
     public GameObject panel;
     static bool howToPlayTriggered;
+    public static bool gameStarted;
 
     private void Start()
     {
+        StartCoroutine(Countdown());
         if (howToPlayTriggered == true)
         {
             panel.SetActive(false);
@@ -30,5 +33,18 @@ public class GameManagerScript : MonoBehaviour
         panel.SetActive(false);
     }
 
-    
+    IEnumerator Countdown()
+    {
+        countdownText.gameObject.SetActive(true);
+        countdownText.text = "Isa!";
+        yield return new WaitForSeconds(1f);
+        countdownText.text = "Duwa!";
+        yield return new WaitForSeconds(1f);
+        countdownText.text = "Tatlo!";
+        yield return new WaitForSeconds(1f);
+        countdownText.text = "Sekyu!";
+        yield return new WaitForSeconds(1f);
+        countdownText.gameObject.SetActive(false);
+        gameStarted = true;
+    }
 }

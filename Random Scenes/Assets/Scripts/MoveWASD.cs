@@ -42,9 +42,12 @@ public class MoveWASD : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        HandlePlayerSwitch();
-        HandleMovement();
-        //HandleInactivePlayers()
+        if (GameManagerScript.gameStarted == true)
+        {
+            HandlePlayerSwitch();
+            HandleMovement();
+            //HandleInactivePlayers()
+        }
         UpdateArrowPosition();
     }
 
@@ -66,7 +69,7 @@ public class MoveWASD : MonoBehaviour
 
     void SwitchToPlayer(GameObject player)
     {
-        if (player != null)
+        if (player != null && player.tag != "Prisoner1")
         {
             activePlayer = player;
             rb = player.GetComponent<Rigidbody2D>();
@@ -80,7 +83,7 @@ public class MoveWASD : MonoBehaviour
         MovementX = 0;
         MovementY = 0;
         float currentSpeed = speed;
-        if (StartsMove && rb != null)
+        if (StartsMove && rb != null && activePlayer.tag != "Prisoner1")
         {
             if (Input.GetKey(KeyCode.LeftShift))
             {
@@ -143,13 +146,14 @@ public class MoveWASD : MonoBehaviour
             }
         }
     }
+
     void UpdateArrowPosition()
     {
-        if (activePlayer == null)
+        if (activePlayer.tag == "Prisoner1")
         {
             Arrow.SetActive(false);
         }
-        else if (Arrow != null && activePlayer != null)
+        else if (Arrow != null && activePlayer != null && activePlayer.tag != "Prisoner1")
         {
             Arrow.SetActive(true);
             Arrow.transform.position = activePlayer.transform.position + offset1;
