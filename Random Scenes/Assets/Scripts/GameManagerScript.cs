@@ -10,7 +10,8 @@ public class GameManagerScript : MonoBehaviour
     public GameObject panel;
     static bool howToPlayTriggered;
     public static bool gameStarted;
-
+    
+    // Start is called before the first frame update
     private void Start()
     {
         StartCoroutine(Countdown());
@@ -19,6 +20,7 @@ public class GameManagerScript : MonoBehaviour
             panel.SetActive(false);
         }
     }
+
     void Update()
     {
         if (Input.anyKeyDown)

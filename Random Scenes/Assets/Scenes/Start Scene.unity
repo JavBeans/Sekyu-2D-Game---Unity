@@ -208,7 +208,16 @@ MonoBehaviour:
     Arrow
 
 
-    Left Shift'
+    Left Shift
+
+
+    I
+
+
+    O
+
+
+    P'
 --- !u!222 &214049463
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1386,7 +1395,16 @@ MonoBehaviour:
     D
 
 
-    Right Shift'
+    Right Shift
+
+
+    1
+
+
+    2
+
+
+    3'
 --- !u!222 &1395547962
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1754,7 +1772,17 @@ MonoBehaviour:
     Move Right
 
 
-    Sprint'
+    Sprint
+
+
+    Switch
+    Player 1
+
+
+    Switch Player 2
+
+
+    Switch Player 3'
 --- !u!222 &1602638777
 CanvasRenderer:
   m_ObjectHideFlags: 0

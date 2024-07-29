@@ -27,8 +27,9 @@ public class FadeInOutScript : MonoBehaviour
             if (canvasgroup.alpha >= 0)
             {
                 canvasgroup.alpha -= timetofade * Time.deltaTime;
-                if (canvasgroup.alpha == 0)
+                if (canvasgroup.alpha <= 0)
                 {
+                    canvasgroup.alpha = 0;
                     fadeOut = false;
                 }
             }
@@ -37,9 +38,11 @@ public class FadeInOutScript : MonoBehaviour
     public void Fadein()
     {
         fadeIn = true;
+        fadeOut = false;
     }
     public void Fadeout()
     {
         fadeOut = true;
+        fadeIn = false;
     }
 }

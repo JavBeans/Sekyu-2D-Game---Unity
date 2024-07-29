@@ -52,6 +52,7 @@ public class PauseScript : MonoBehaviour
     {
         Base1Script.score2 = 0;
         Base2Script.score1 = 0;
+        GameManagerScript.gameStarted = false;
         Continue();
         StartCoroutine(RestartScene());
     }
