@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class PlayerManager : MonoBehaviour
 {
     public GameObject[] players;
-    public Image[] playerImages;
 
     // Update is called once per frame
 
@@ -17,7 +16,7 @@ public class PlayerManager : MonoBehaviour
         {
             if (players[i].tag == "Prisoner1")
             {
-                playerImages[i].gameObject.SetActive(true);
+                
             }
         }
     }

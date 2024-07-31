@@ -1,14 +1,12 @@
 using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class Base2Script : MonoBehaviour
 {
-    
-    public Text textWin;
-    public Text textScore;
+    public TextMeshProUGUI textWin;
+    public TextMeshProUGUI textScore;
 
     public static int score1;
     public static int playernumber2;

@@ -17,6 +17,9 @@ public class MoveArrows : MonoBehaviour
 
     private Rigidbody2D rb;
     private GameObject activePlayer;
+    public GameObject P1_IconLight;
+    public GameObject P2_IconLight;
+    public GameObject P3_IconLight;
 
 
     void Start()
@@ -24,6 +27,7 @@ public class MoveArrows : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         SwitcherNumber = 1;
         SwitchToPlayer(P1);
+        playerHighlight(P1);
     }
 
     // Update is called once per frame
@@ -38,19 +42,22 @@ public class MoveArrows : MonoBehaviour
 
     void HandlePlayerSwitch()
     {
-        if (Input.GetKeyDown(KeyCode.I))
+        if (Input.GetKeyDown(KeyCode.I) && P1.tag != "Prisoner1")
         {
             SwitchToPlayer(P1);
+            playerHighlight(P1);
             SwitcherNumber = 1;
         }
-        else if (Input.GetKeyDown(KeyCode.O))
+        else if (Input.GetKeyDown(KeyCode.O) && P2.tag != "Prisoner1")
         {
             SwitchToPlayer(P2);
+            playerHighlight(P2);
             SwitcherNumber = 2;
         }
-        else if (Input.GetKeyDown(KeyCode.P))
+        else if (Input.GetKeyDown(KeyCode.P) && P3.tag != "Prisoner1")
         {
             SwitchToPlayer(P3);
+            playerHighlight(P3);
             SwitcherNumber = 3;
         }
     }
@@ -91,6 +98,27 @@ public class MoveArrows : MonoBehaviour
         {
             Arrow.SetActive(true);
             Arrow.transform.position = activePlayer.transform.position + offset1;
+        }
+    }
+    void playerHighlight(GameObject player)
+    {
+        if (player == P1 && player.tag != "Prisoner1")
+        {
+            P1_IconLight.gameObject.SetActive(true);
+            P2_IconLight.gameObject.SetActive(false);
+            P3_IconLight.gameObject.SetActive(false);
+        }
+        if (player == P2 && player.tag != "Prisoner1")
+        {
+            P1_IconLight.gameObject.SetActive(false);
+            P2_IconLight.gameObject.SetActive(true);
+            P3_IconLight.gameObject.SetActive(false);
+        }
+        if (player == P3 && player.tag != "Prisoner1")
+        {
+            P1_IconLight.gameObject.SetActive(false);
+            P2_IconLight.gameObject.SetActive(false);
+            P3_IconLight.gameObject.SetActive(true);
         }
     }
 }

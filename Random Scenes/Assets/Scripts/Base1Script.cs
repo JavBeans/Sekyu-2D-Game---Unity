@@ -1,16 +1,13 @@
 using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class Base1Script : MonoBehaviour
 {
-    public Text textWin;
-    public Text textScore;
+    public TextMeshProUGUI textWin;
+    public TextMeshProUGUI textScore;
 
-
-    
     public static int score2;
     public static int playernumber1;
     public static bool gamefinish;
@@ -21,6 +18,7 @@ public class Base1Script : MonoBehaviour
         gamefinish = false;
         playernumber1 = 0;
     }
+
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player2") && gamefinish == false)
@@ -35,7 +33,7 @@ public class Base1Script : MonoBehaviour
         }
         else if (other.gameObject.CompareTag("Player1"))
         {
-
+            // Handle Player1 collision if needed
         }
     }
 
@@ -43,9 +41,10 @@ public class Base1Script : MonoBehaviour
     {
         textScore.text = $"{Base2Script.score1} | {score2}";
     }
+
     IEnumerator RestartScene()
     {
-        yield return new WaitForSeconds(2); 
+        yield return new WaitForSeconds(2);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

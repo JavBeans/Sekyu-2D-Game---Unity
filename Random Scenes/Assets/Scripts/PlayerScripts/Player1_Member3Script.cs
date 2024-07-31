@@ -1,7 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
+using TMPro;
 using UnityEngine.UI;
 
 public class Player1_Member3Script : MonoBehaviour
@@ -10,32 +9,38 @@ public class Player1_Member3Script : MonoBehaviour
     public float slowspeed;
     public float sprintSpeed;
     public static float sprintReductionRate = 20f;
-    public static float fatigueReductionRate = 20f;
-    public static float fatigueRecoverRate = 10f;
+    public static float staminaReductionRate = 5f;
+    public static float staminaRecoverRate = 3f;
     float MovementX;
     float MovementY;
     public float timeCount;
     public float sprintValue = 100f;
-    public float fatigueValue = 100f;
+    public float staminaValue = 100f;
+    public float MaxstaminaValue = 100f;
+    public float MaxsprintValue = 100f;
 
     private Rigidbody2D rb;
     public Transform playerLocation;
-    public Transform Base1PrisonLocation;
+    public Transform BasePrisonLocation;
     public Vector3 offset1;
     public Vector3 offset2;
 
-    public Text textPlayer1;
+    public TextMeshProUGUI textPlayer;
     public Text textTime;
-    public Text textSprint;
-    public Text textFatigue;
 
     private bool isInsideBase;
     private bool isCaptured;
+
+    private Coroutine speedCoroutine;
 
     public GameObject player2_1;
     public GameObject player2_2;
     public GameObject player2_3;
 
+    public ParticleSystem dust;
+
+    public Image staminaBar;
+    public Image sprintBar;
 
     void Start()
     {
@@ -48,10 +53,10 @@ public class Player1_Member3Script : MonoBehaviour
             HandleMovement();
         }
 
-        if (MoveWASD.SwitcherNumber == 3)
+        if (MoveWASD.SwitcherNumber == 3 && !isCaptured)
         {
-            textSprint.text = "Sprint: " + sprintValue.ToString("F0") + "%";
-            textFatigue.text = "Fatigue: " + fatigueValue.ToString("F0") + "%";
+            staminaBar.fillAmount = staminaValue / MaxstaminaValue;
+            sprintBar.fillAmount = sprintValue / MaxsprintValue;
         }
 
         if (isInsideBase && isCaptured == false)
@@ -61,8 +66,16 @@ public class Player1_Member3Script : MonoBehaviour
         }
         Vector3 targetPosition1 = playerLocation.position + offset1;
         Vector3 targetPosition2 = playerLocation.position + offset2;
-        textPlayer1.transform.position = Camera.main.WorldToScreenPoint(targetPosition1);
+        textPlayer.transform.position = Camera.main.WorldToScreenPoint(targetPosition1);
         textTime.transform.position = Camera.main.WorldToScreenPoint(targetPosition2);
+        if (sprintValue > MaxsprintValue)
+        {
+            sprintValue = 100;
+        }
+        if (staminaValue > MaxstaminaValue)
+        {
+            staminaValue = 100;
+        }
 
     }
     void OnTriggerEnter2D(Collider2D other)
@@ -93,6 +106,46 @@ public class Player1_Member3Script : MonoBehaviour
                 HandlePlayerCollision(player2_3, playerTimeCount);
             }
         }
+        if (other.gameObject.CompareTag("Water"))
+        {
+            sprintValue += 50;
+            staminaValue += 100;
+
+            Destroy(other.gameObject);
+        }
+        if (other.gameObject.CompareTag("Slipper"))
+        {
+            if (speedCoroutine != null)
+            {
+                StopCoroutine(speedCoroutine);
+            }
+            speedCoroutine = StartCoroutine(IncreaseSpeedForDuration(3, 3)); // Increase speed by 3 for 3 seconds
+            Destroy(other.gameObject);
+        }
+
+        if (other.gameObject.CompareTag("Mud"))
+        {
+            if (speedCoroutine != null)
+            {
+                StopCoroutine(speedCoroutine);
+            }
+            speedCoroutine = StartCoroutine(DecreaseSpeedForDuration(1, 3)); // Decrease speed by 1 for 3 seconds
+            Destroy(other.gameObject);
+        }
+    }
+
+    private IEnumerator IncreaseSpeedForDuration(float amount, float duration)
+    {
+        speed = amount;
+        yield return new WaitForSeconds(duration);
+        speed = 2;
+    }
+
+    private IEnumerator DecreaseSpeedForDuration(float amount, float duration)
+    {
+        speed = amount;
+        yield return new WaitForSeconds(duration);
+        speed = 2;
     }
     private void HandlePlayerCollision(GameObject otherPlayer, float otherPlayerTimeCount)
     {
@@ -101,7 +154,7 @@ public class Player1_Member3Script : MonoBehaviour
             isCaptured = true;
             StartCoroutine(CapturePlayer(this.gameObject)); //capture This Player
             textTime.text = timeCount.ToString("Captured");
-            textPlayer1.gameObject.SetActive(false);
+            textPlayer.gameObject.SetActive(false);
         }
     }
     private IEnumerator CapturePlayer(GameObject player)
@@ -110,10 +163,10 @@ public class Player1_Member3Script : MonoBehaviour
         Rigidbody2D playerRb = player.GetComponent<Rigidbody2D>();
         if (playerRb != null)
         {
-            while (Vector3.Distance(player.transform.position, Base1PrisonLocation.position) > 0.1f)
+            while (Vector3.Distance(player.transform.position, BasePrisonLocation.position) > 0.1f)
             {
-                Vector3 direction = (Base1PrisonLocation.position - player.transform.position).normalized;
-                playerRb.velocity = direction * speed;
+                Vector3 direction = (BasePrisonLocation.position - player.transform.position).normalized;
+                playerRb.velocity = direction * 10;
                 yield return null;
             }
             playerRb.velocity = Vector2.zero; // Stop player movement
@@ -135,10 +188,12 @@ public class Player1_Member3Script : MonoBehaviour
         MovementX = 0;
         MovementY = 0;
         float currentSpeed = speed;
+
         if (MoveWASD.SwitcherNumber == 3 && rb != null && gameObject.tag != "Prisoner1")
         {
             if (Input.GetKey(KeyCode.LeftShift) && sprintValue > 0)
             {
+                dust.Play();
                 currentSpeed = sprintSpeed;
                 sprintValue = Mathf.Max(sprintValue - sprintReductionRate * Time.deltaTime, 0);
             }
@@ -158,11 +213,12 @@ public class Player1_Member3Script : MonoBehaviour
             {
                 MovementX = 1;
             }
-            if (MovementX != 0 || MovementY != 0 && fatigueValue > 0)
+            if (MovementX != 0 || MovementY != 0 && staminaValue > 0)
             {
-                if (fatigueValue > 0)
+                if (staminaValue > 0)
                 {
-                    fatigueValue = Mathf.Max(fatigueValue - fatigueReductionRate * Time.deltaTime, 0);
+                    staminaValue = Mathf.Max(staminaValue - staminaReductionRate * Time.deltaTime, 0);
+
                 }
                 else
                 {
@@ -171,17 +227,19 @@ public class Player1_Member3Script : MonoBehaviour
             }
             else
             {
-                if (fatigueValue < 100)
+                if (staminaValue < 100)
                 {
-                    fatigueValue = Mathf.Max(fatigueValue + fatigueRecoverRate * Time.deltaTime, 0);
+                    staminaValue = Mathf.Max(staminaValue + staminaRecoverRate * Time.deltaTime, 0);
+
                 }
             }
         }
         else
         {
-            if (fatigueValue < 100)
+            if (staminaValue < 100)
             {
-                fatigueValue = Mathf.Max(fatigueValue + fatigueRecoverRate * Time.deltaTime, 0);
+                staminaValue = Mathf.Max(staminaValue + staminaRecoverRate * Time.deltaTime, 0);
+
             }
         }
         rb.velocity = new Vector2(MovementX * currentSpeed, MovementY * currentSpeed);
