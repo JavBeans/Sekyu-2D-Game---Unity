@@ -10,6 +10,10 @@ TagManager:
   - Player2
   - Base1
   - Base2
+  - Prisoner1
+  - Slipper
+  - Water
+  - Mud
   layers:
   - Default
   - TransparentFX
@@ -47,9 +51,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Player
-    uniqueID: 2480060407
-    locked: 0
   - name: Base
     uniqueID: 1322172955
+    locked: 0
+  - name: Object
+    uniqueID: 2203276115
+    locked: 0
+  - name: Player
+    uniqueID: 2480060407
     locked: 0
