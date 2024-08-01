@@ -5733,6 +5733,7 @@ MonoBehaviour:
   - {fileID: 4862971593795835709, guid: 6071acfe313a26b47b77cdc223c1079b, type: 3}
   - {fileID: 7720142552796255412, guid: 3e23be44943cc7545b4026a193700775, type: 3}
   - {fileID: 6064788140172049334, guid: 88415c0dcf2920f4e99d6c24c3814609, type: 3}
+  textPrefab: {fileID: 1731418993424979693, guid: bfee0a2be440ab34bbde3230bef6b554, type: 3}
   width: 16
   height: 7
   spawnInterval: 3
@@ -8288,11 +8289,11 @@ RectTransform:
   - {fileID: 716255829}
   - {fileID: 1787795299}
   - {fileID: 412029855}
-  - {fileID: 1783783579}
   - {fileID: 1316869509}
   - {fileID: 1594520628}
   - {fileID: 1315608104}
   - {fileID: 531656089}
+  - {fileID: 1783783579}
   - {fileID: 2147226238}
   - {fileID: 113509073}
   m_Father: {fileID: 0}
@@ -8584,7 +8585,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!225 &2147226235
 CanvasGroup:
   m_ObjectHideFlags: 0
