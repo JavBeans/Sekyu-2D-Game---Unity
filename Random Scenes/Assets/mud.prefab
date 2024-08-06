@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1806207579912513876}
   - component: {fileID: 6973030276704714994}
-  - component: {fileID: 6190481981428219321}
+  - component: {fileID: 5993512618148183280}
   m_Layer: 0
   m_Name: mud
   m_TagString: Mud
@@ -27,8 +27,8 @@ Transform:
   m_GameObject: {fileID: 6064788140172049334}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.2329, y: 2.1649, z: 0}
-  m_LocalScale: {x: 0.1278, y: 0.1543, z: 1}
+  m_LocalPosition: {x: -1.712, y: 1.4577, z: 0}
+  m_LocalScale: {x: 1.7556229, y: 2.3642626, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: -2091691181
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c6ebb272750c3094f8a36c8165f189f6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1d1b243eea4a903448778db74dfa5143, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -85,8 +85,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &6190481981428219321
-BoxCollider2D:
+--- !u!70 &5993512618148183280
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -117,16 +117,6 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.02725786, y: -0.22577715}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5.12, y: 5.12}
-    newSize: {x: 5.12, y: 5.12}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 2.3940678, y: 3.5847168}
-  m_EdgeRadius: 0
+  m_Offset: {x: 0.0028932039, y: -0.051565886}
+  m_Size: {x: 0.6246144, y: 0.21888141}
+  m_Direction: 1
