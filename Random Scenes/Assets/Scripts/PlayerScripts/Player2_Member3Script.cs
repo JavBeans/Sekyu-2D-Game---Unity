@@ -55,11 +55,8 @@ public class Player2_Member3Script : MonoBehaviour
             HandleMovement();
         }
 
-        if (MoveArrows.SwitcherNumber == 3 && !isCaptured)
-        {
-            staminaBar.fillAmount = staminaValue / MaxstaminaValue;
-            sprintBar.fillAmount = sprintValue / MaxsprintValue;
-        }
+        staminaBar.fillAmount = staminaValue / MaxstaminaValue;
+        sprintBar.fillAmount = sprintValue / MaxsprintValue;
 
         if (isInsideBase && isCaptured == false)
         {

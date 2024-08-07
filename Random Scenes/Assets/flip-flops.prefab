@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4462674590804421299}
   - component: {fileID: 1583345267956560862}
   - component: {fileID: 8010600887298896210}
+  - component: {fileID: 3624636963261186934}
   m_Layer: 0
   m_Name: flip-flops
   m_TagString: Slipper
@@ -120,3 +121,17 @@ CapsuleCollider2D:
   m_Offset: {x: -0.015530244, y: 0.037838504}
   m_Size: {x: 0.45458722, y: 0.64169264}
   m_Direction: 0
+--- !u!114 &3624636963261186934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7720142552796255412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c232728e3eeade478c6b48afa5bf28a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bounceSpeed: 0.5
+  bounceHeight: 0.2
