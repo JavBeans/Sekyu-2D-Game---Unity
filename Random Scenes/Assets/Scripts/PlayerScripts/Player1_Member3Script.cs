@@ -42,9 +42,11 @@ public class Player1_Member3Script : MonoBehaviour
     public Image staminaBar;
     public Image sprintBar;
 
+    public Animator animator;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
     void Update()
     {
@@ -189,6 +191,9 @@ public class Player1_Member3Script : MonoBehaviour
         MovementY = 0;
         float currentSpeed = speed;
 
+        animator.SetFloat("Speed", -1);
+        animator.SetFloat("Horizontal", 0);
+
         if (MoveWASD.SwitcherNumber == 3 && rb != null && gameObject.tag != "Prisoner1")
         {
             if (Input.GetKey(KeyCode.LeftShift) && sprintValue > 0)
@@ -208,10 +213,14 @@ public class Player1_Member3Script : MonoBehaviour
             if (Input.GetKey(KeyCode.A))
             {
                 MovementX = -1;
+                animator.SetFloat("Speed", 1);
+                animator.SetFloat("Horizontal", -1);
             }
             if (Input.GetKey(KeyCode.D))
             {
                 MovementX = 1;
+                animator.SetFloat("Speed", 1);
+                animator.SetFloat("Horizontal", 1);
             }
             if (MovementX != 0 || MovementY != 0 && staminaValue > 0)
             {
