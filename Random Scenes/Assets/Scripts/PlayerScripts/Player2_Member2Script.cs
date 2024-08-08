@@ -28,7 +28,7 @@ public class Player2_Member2Script : MonoBehaviour
     public Vector3 offset2;
 
     public TextMeshProUGUI textPlayer;
-    public Text textTime;
+    public TextMeshProUGUI textTime;
 
     private bool isInsideBase;
     private bool isCaptured;
