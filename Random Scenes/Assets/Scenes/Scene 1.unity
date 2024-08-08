@@ -267,6 +267,7 @@ GameObject:
   - component: {fileID: 39536609}
   - component: {fileID: 39536614}
   - component: {fileID: 39536615}
+  - component: {fileID: 39536616}
   m_Layer: 0
   m_Name: Player (2) (2)
   m_TagString: Player2
@@ -470,6 +471,7 @@ MonoBehaviour:
   dust: {fileID: 932379835}
   staminaBar: {fileID: 678569358}
   sprintBar: {fileID: 201174222}
+  animator: {fileID: 39536616}
 --- !u!58 &39536615
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -505,6 +507,27 @@ CircleCollider2D:
   m_Offset: {x: -0.000030994415, y: 0.000010073185}
   serializedVersion: 2
   m_Radius: 0.2
+--- !u!95 &39536616
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 39536607}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 59fdac66e011d584693568ec0024e651, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &95550822
 GameObject:
   m_ObjectHideFlags: 0
@@ -2999,6 +3022,7 @@ GameObject:
   - component: {fileID: 719803192}
   - component: {fileID: 719803196}
   - component: {fileID: 719803197}
+  - component: {fileID: 719803198}
   m_Layer: 0
   m_Name: Player (2) (3)
   m_TagString: Player2
@@ -3200,8 +3224,11 @@ MonoBehaviour:
   player1_2: {fileID: 2045838259}
   player1_3: {fileID: 1179052569}
   dust: {fileID: 1643467303}
+
   staminaBar: {fileID: 1145895965}
   sprintBar: {fileID: 1965324052}
+  animator: {fileID: 719803198}
+
 --- !u!58 &719803197
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -3237,6 +3264,27 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0.000010162592}
   serializedVersion: 2
   m_Radius: 0.2
+--- !u!95 &719803198
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 719803189}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5cedfa7e5ecfe6349a93382d728d3a62, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &746168522
 GameObject:
   m_ObjectHideFlags: 0
@@ -4832,6 +4880,7 @@ MonoBehaviour:
   dust: {fileID: 661955740}
   staminaBar: {fileID: 1659118860}
   sprintBar: {fileID: 1700508633}
+  animator: {fileID: 0}
 --- !u!58 &1179052577
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -5576,6 +5625,7 @@ MonoBehaviour:
   dust: {fileID: 173485816}
   staminaBar: {fileID: 1975567442}
   sprintBar: {fileID: 1277675039}
+  animator: {fileID: 0}
 --- !u!58 &1270088189
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -6895,6 +6945,7 @@ MonoBehaviour:
   dust: {fileID: 113919803}
   staminaBar: {fileID: 1777947801}
   sprintBar: {fileID: 2011929133}
+  animator: {fileID: 1616237155}
 --- !u!58 &1616237154
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -9080,6 +9131,7 @@ MonoBehaviour:
   dust: {fileID: 1000115669}
   staminaBar: {fileID: 1230237736}
   sprintBar: {fileID: 173819924}
+  animator: {fileID: 2045838268}
 --- !u!58 &2045838267
 CircleCollider2D:
   m_ObjectHideFlags: 0
