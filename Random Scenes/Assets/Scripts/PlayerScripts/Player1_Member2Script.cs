@@ -26,7 +26,7 @@ public class Player1_Member2Script : MonoBehaviour
     public Vector3 offset2;
 
     public TextMeshProUGUI textPlayer;
-    public Text textTime;
+    public TextMeshProUGUI textTime;
 
     private bool isInsideBase;
     private bool isCaptured;
@@ -56,11 +56,8 @@ public class Player1_Member2Script : MonoBehaviour
             HandleMovement();
         }
 
-        if (MoveWASD.SwitcherNumber == 2 && !isCaptured)
-        {
-            staminaBar.fillAmount = staminaValue / MaxstaminaValue;
-            sprintBar.fillAmount = sprintValue / MaxsprintValue;
-        }
+        staminaBar.fillAmount = staminaValue / MaxstaminaValue;
+        sprintBar.fillAmount = sprintValue / MaxsprintValue;
 
         if (isInsideBase && isCaptured == false)
         {

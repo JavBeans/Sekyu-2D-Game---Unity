@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1806207579912513876}
   - component: {fileID: 6973030276704714994}
   - component: {fileID: 5993512618148183280}
+  - component: {fileID: 5956702427574845376}
   m_Layer: 0
   m_Name: mud
   m_TagString: Mud
@@ -120,3 +121,17 @@ CapsuleCollider2D:
   m_Offset: {x: 0.0028932039, y: -0.051565886}
   m_Size: {x: 0.6246144, y: 0.21888141}
   m_Direction: 1
+--- !u!114 &5956702427574845376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6064788140172049334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c232728e3eeade478c6b48afa5bf28a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bounceSpeed: 0.1
+  bounceHeight: 0.2

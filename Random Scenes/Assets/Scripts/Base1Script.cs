@@ -39,7 +39,7 @@ public class Base1Script : MonoBehaviour
 
     void updatedScore()
     {
-        textScore.text = $"{Base2Script.score1} | {score2}";
+        textScore.text = $"{Base2Script.score1}|{score2}";
     }
 
     IEnumerator RestartScene()
