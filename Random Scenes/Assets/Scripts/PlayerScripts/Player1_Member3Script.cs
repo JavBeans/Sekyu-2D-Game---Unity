@@ -9,7 +9,7 @@ public class Player1_Member3Script : MonoBehaviour
     public float slowspeed;
     public float sprintSpeed;
     public static float sprintReductionRate = 20f;
-    public static float staminaReductionRate = 5f;
+    public static float staminaReductionRate = 8f;
     public static float staminaRecoverRate = 3f;
     float MovementX;
     float MovementY;
@@ -107,7 +107,7 @@ public class Player1_Member3Script : MonoBehaviour
         }
         if (other.gameObject.CompareTag("Water"))
         {
-            sprintValue += 50;
+            sprintValue += 30;
             staminaValue += 100;
 
             Destroy(other.gameObject);

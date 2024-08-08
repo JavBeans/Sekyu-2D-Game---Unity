@@ -10,6 +10,9 @@ public class RandomSpawning : MonoBehaviour
     public float width = 1;
     public float height = 1;
     public float spawnInterval = 5f;
+    public int maxSpawnedObjects = 15; // Maximum number of spawned objects
+
+    private List<GameObject> spawnedObjects = new List<GameObject>();
 
     private void Start()
     {
@@ -20,7 +23,10 @@ public class RandomSpawning : MonoBehaviour
     {
         while (true)
         {
-            RandomSpawn();
+            if (spawnedObjects.Count < maxSpawnedObjects)
+            {
+                RandomSpawn();
+            }
             yield return new WaitForSeconds(spawnInterval);
         }
     }
@@ -35,9 +41,12 @@ public class RandomSpawning : MonoBehaviour
         GameObject selectedPrefab = Prefabs[randomIndex];
 
         GameObject spawnedObject = Instantiate(selectedPrefab, randomPos, Quaternion.identity);
+        spawnedObjects.Add(spawnedObject); // Add to the list of spawned objects
+
         DestroyableObject destroyable = spawnedObject.AddComponent<DestroyableObject>();
         destroyable.textPrefab = textPrefab;
         destroyable.identifier = randomIndex; // Set the identifier based on the prefab index
+        destroyable.onDestroyCallback = () => spawnedObjects.Remove(spawnedObject); // Remove from list when destroyed
     }
 
     private void OnDrawGizmos()
@@ -51,12 +60,18 @@ public class DestroyableObject : MonoBehaviour
 {
     public GameObject textPrefab;
     public int identifier; // Add an identifier to determine which text to show
+    public System.Action onDestroyCallback; // Callback to notify when destroyed
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player1") || other.CompareTag("Player2"))
         {
             ShowText();
+            if (onDestroyCallback != null)
+            {
+                onDestroyCallback.Invoke(); // Notify that the object is destroyed
+            }
+            Destroy(gameObject); // Destroy the object
         }
     }
 
@@ -72,7 +87,7 @@ public class DestroyableObject : MonoBehaviour
                 textComponent.text = "Hydrated!";
                 break;
             case 1:
-                textComponent.text = "Speed+!";
+                textComponent.text = "Speed+";
                 break;
             case 2:
                 textComponent.text = "Slowed!";
