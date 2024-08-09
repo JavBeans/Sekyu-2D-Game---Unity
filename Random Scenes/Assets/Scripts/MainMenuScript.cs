@@ -18,6 +18,7 @@ public class MainMenuScript : MonoBehaviour
         Base1Script.score2 = 0;
         Base2Script.score1 = 0;
         StartCoroutine(ChangeScene());
+        GameManagerScript.gameStarted = false;
     }
 
     public void OptionButton()

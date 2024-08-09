@@ -109,7 +109,7 @@ public class Player2_Member3Script : MonoBehaviour
         if (other.gameObject.CompareTag("Water"))
         {
             sprintValue += 30;
-            staminaValue += 100;
+            staminaValue += 30;
 
             Destroy(other.gameObject);
         }
